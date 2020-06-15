@@ -184,11 +184,11 @@ function job(position) {
   return `
   <h1 class="job">
     ${position}
-  </h1>;
+  </h1>
   `;
 }
 
-function jobBottom(postedAt, contract, location){
+function jobBottom(postedAt, contract, location) {
   return `
   <div class="job_bottom">
     <ul>
@@ -202,6 +202,12 @@ function jobBottom(postedAt, contract, location){
   `;
 }
 
+function tags(languages, tools, role) {
+  const tags = [...languages, ...tools, role];
+  const tag = (tagName) => `<li>${tagName}</li>`;
+  return tags.map(tag).join("");
+}
+
 function cardTemplate(jobOffer) {
   return `
     <article class="card">
@@ -210,8 +216,17 @@ function cardTemplate(jobOffer) {
           <div class="card-job_details">
             ${jobTag(jobOffer.company, jobOffer.new)}
             ${job(jobOffer.position)}
-            ${jobBottom(jobOffer.postedAt, jobOffer.contract, jobOffer.location)}
+            ${jobBottom(
+              jobOffer.postedAt,
+              jobOffer.contract,
+              jobOffer.location
+            )}
           </div>
+        <div class="tags">
+          <ul>
+            ${tags(jobOffer.languages, jobOffer.tools, jobOffer.role)}
+          </ul>
+        </div>
       </div>
     </article>
   `;
