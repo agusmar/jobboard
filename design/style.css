@@ -1,7 +1,119 @@
-html{
-    background-color: #bdbdbd;
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Open+Sans:wght@600;700;800&display=swap');
+
+*{
+  margin: 0;
+  padding:0;
+}
+
+.jobs{
+    background-color: #d6fcf55e;
+}
+.cards-container {
+
+}
+
+.card{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: auto;
+  padding: 20px;
+  border-left: 5px solid #5fa2a8;
+  box-shadow: 8px 8px 17px 5px #8cd6c656;
+  width: 70vw;
+  background-color: #f4f4f4;
+  justify-content: space-between;
+}
+
+.header{
+  background: url(./images/bg-header-desktop.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #45797e;
+  background-size: cover;
+  width: 100vw;
+  height: 220px;
+  margin-bottom: 150px;
 }
 
 .items{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Lato', sans-serif;
+}
+
+
+.card-job{
+  display: flex;
+  align-items: center; 
+}
+
+.card-job_details{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 90px 0 20px;
+}
+
+.job_tag ul{
+  align-items: baseline;
+}
+
+.job{
+  margin: 15px 0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 900;
+}
+
+.tags li{
+  justify-content: space-evenly;
+  background-color: #bdddd685;
+  border-radius: 2px;
+  padding: 5px;
+  color: #7fa8ad;
+  font-weight: 600;
+}
+
+ul{
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+}
+
+ul li{
+  margin: 0 5px;
+}
+
+.company{
+  color: #99b898;
+  font-weight: 600;
+}
+
+.new-old{
+  background-color: #7fa8ad;
+  color: white;
+  padding: 8px;
+  font-weight: 700;
+  border-radius: 40px;
+}
+
+.featured{
+  background-color: #454545;
+  color: #f4f4f4;
+  padding: 8px;
+  font-weight: 700;
+  border-radius: 40px;
+}
+
+.item-tag{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: justify;
+}
+
+.job_bottom{
+  color: #45454545;
+  font-weight: 600;
 }
