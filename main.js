@@ -166,7 +166,7 @@ function jobTag(company, isNew) {
     <div class="job_tag">
       <ul>
         <li class="company">${company}</li>
-        ${isNew ? "<li class='new-old'> NEW! </li>" : ""}
+        ${isNew ? "<li class='isNew'> NEW! </li>" : ""}
       </ul>
     </div>
   `;
@@ -174,8 +174,8 @@ function jobTag(company, isNew) {
 
 function companyLogo(logo) {
   return `
-    <div class="company-logo">
-      <img src="${logo}" alt="logo" class="logo"/>
+    <div>
+      <img src="${logo}" alt="logo"/>
     </div>
   `;
 }
@@ -210,11 +210,14 @@ function tags(languages, tools, role) {
 
 function cardTemplate(jobOffer) {
   return `
-    <article class="card">
-      <div class="card-job">
-        ${companyLogo(jobOffer.logo)}
+      <article class="card">
+        <div class="card-job">
+          ${companyLogo(jobOffer.logo)}
           <div class="card-job_details">
-            ${jobTag(jobOffer.company, jobOffer.new)}
+            ${jobTag(
+              jobOffer.company,
+              jobOffer.new
+              )}
             ${job(jobOffer.position)}
             ${jobBottom(
               jobOffer.postedAt,
@@ -222,13 +225,13 @@ function cardTemplate(jobOffer) {
               jobOffer.location
             )}
           </div>
+        </div>
         <div class="tags">
           <ul>
             ${tags(jobOffer.languages, jobOffer.tools, jobOffer.role)}
           </ul>
         </div>
-      </div>
-    </article>
+      </article>
   `;
 }
 
