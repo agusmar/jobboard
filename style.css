@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;400;700&family=Open+Sans:wght@600;700;800&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@500;700&display=swap');
 
 
 *{
   margin: 0;
   padding:0;
-  font-family: 'lato', bold;
+  font-family: 'Spartan', sans-serif;
+  font-weight: 500;
 }
 
 
@@ -83,8 +85,8 @@
 
     .card-job_details .job{
       margin: 15px 0;
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 900;
+      font-family: 'Spartan', sans-serif;
+      font-weight: 700;
     }
 
     .card-job_details .job_bottom{
