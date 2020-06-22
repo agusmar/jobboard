@@ -44,7 +44,6 @@
   border-radius: 6px;
   box-shadow: 8px 8px 17px 5px #8cd6c656; 
   background-color: #f4f4f4; 
-  border: 1px solid blue;
 }
 
 .card .card-job {
@@ -52,7 +51,6 @@
   flex-direction: row;
   align-items: flex-start;
   width: 50%;
-  border: 1px solid green;
 }
 
 .company-logo {
@@ -71,7 +69,6 @@
   flex-wrap: wrap;
   align-items: flex-start;
   margin-left: 20px;
-  border: 1px solid cyan;
 }
 
 .card-job_details .job_tag ul {
@@ -79,13 +76,11 @@
   justify-content: space-around;
   align-items: center; 
   list-style: none;
-  border: 1px solid red;
 }
 
 .job_tag ul .company {
   color: #99b898;
   font-weight: 600;
-  border: 1px solid red;
 }
 
 .job_tag ul .isNew {
@@ -105,7 +100,6 @@
 .card-job_details .job_bottom {
   color: #45454545;
   font-weight: 600;
-  border: 1px solid blueviolet;
 }
 
 .card .tags li {
@@ -115,14 +109,11 @@
   padding: 5px;
   color: #7fa8ad;
   font-weight: 600;
-  border: 1px solid fuchsia;
 
 }
 
 .tags {
-  border: 1px solid fuchsia;
   display: flex;
-
 }
 
 .tags li:hover {
@@ -168,6 +159,18 @@ li {
 
   .card .card-job {
     width: 100%;
+    position: relative;
+    padding-top: 10px;
+
+  }
+
+  img {
+    position: absolute;
+    top: -45px;
+    height: 45px;
+ 
+
+
   }
 
   .card-job .card-job_details {
@@ -182,6 +185,7 @@ li {
   .tags {
     display: flex;
     padding: 0;
+    align-self: flex-start;
   }
 
   ul {
