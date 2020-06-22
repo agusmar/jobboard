@@ -21,8 +21,8 @@
   background-color: #45797e;
   background-size: cover;
   width: 100%;
-  height: 220px;
-  margin-bottom: 150px;
+  height: 150px;
+  margin-bottom: 40px;
 }
 
 .cards-container {
@@ -54,7 +54,6 @@
 }
 
 .company-logo {
-  border: 1px solid blue;
   align-self: left;
   width: 200px;
 }
@@ -134,11 +133,11 @@ li {
 .attribution {
   font-size: 18px;
   text-align: center;
-  margin-top: 50px;
+  padding: 50px;
 }
 
 .attribution a {
-  color: hsla(0, 88%, 68%, 0.247);
+  color: #45797e;
 }
 
 /* mobile */
@@ -198,6 +197,7 @@ li {
     margin-left: 0;
   }
 
-  
-
+  .attribution {
+    font-size: 14px;
+  }
 }
