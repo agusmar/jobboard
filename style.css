@@ -55,6 +55,16 @@
   border: 1px solid green;
 }
 
+.company-logo {
+  border: 1px solid blue;
+  align-self: left;
+  width: 200px;
+}
+
+.company-logo img {
+  width: 100%;
+}
+
 .card-job .card-job_details {
   display: flex;
   flex-direction: column;
@@ -148,8 +158,7 @@ li {
     flex-direction: column;
     align-items: center;
     background-color: #f4f4f4;
-    /* padding: 20px;
-    margin: 20px; */
+    padding: 20px;
   }
 
   .cards-container .card-job {
@@ -157,14 +166,34 @@ li {
     flex-direction: column;
   }
 
-  .card-job {
-    z-index: 1;
-    border: 1px solid red;
-    
+  .card .card-job {
+    width: 100%;
+  }
+
+  .card-job .card-job_details {
+    margin: 0;
+  }
+
+  .card-job .card-job_details li {
+    margin: 0;
+    font-size: 12px;
   }
 
   .tags {
     display: flex;
-    align-self: flex-start;
+    padding: 0;
   }
+
+  ul {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  li {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+
+  
+
 }
