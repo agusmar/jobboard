@@ -211,7 +211,7 @@ function jobBottom(postedAt, contract, location) {
 function tags(languages, tools, role) {
   const tags = [...languages, ...tools, role];
   const tag = (tagName) => `
-  <li><button class='tag-btn'>${tagName}</button></li>
+  <li><button class='tag-btn' data-tag='${tagName}' >${tagName}</button></li>
   `;
   return tags.map(tag).join("");
 }
@@ -275,7 +275,7 @@ function toggleFilterRole(role) {
 
 function filterOffer(jobOffer){
 
-  return jobOffer.languages.includes("JavaScript");
+
 
 }
 
@@ -287,7 +287,13 @@ function render() {
 
 render();
 
-document.getElementsByClassName(tag-btn).addEventListener('click', () => alert('x'))
+document.getElementsByClassName("tag-btn").forEach(item => {
+	item.addEventListener('click', event => {
+		const tag = event.target.dataset.tag;
+		
+		render();
+	})
+})
 
 
 
