@@ -151,6 +151,12 @@ const jobOffers = [
   },
 ];
 
+let filterTags = {
+  roles: [],
+  languages: [],
+  tools: []
+}
+
 const cardsContainer = document.getElementById("cards-container");
 
 fetch("./data.json")
@@ -204,7 +210,9 @@ function jobBottom(postedAt, contract, location) {
 
 function tags(languages, tools, role) {
   const tags = [...languages, ...tools, role];
-  const tag = (tagName) => `<li>${tagName}</li>`;
+  const tag = (tagName) => `
+  <li><button class='tag-btn'>${tagName}</button></li>
+  `;
   return tags.map(tag).join("");
 }
 
@@ -235,4 +243,51 @@ function cardTemplate(jobOffer) {
   `;
 }
 
-cardsContainer.innerHTML = jobOffers.map(cardTemplate).join("");
+
+function toggleFilterTool(tool) {
+	
+	if(filterTags.tools.includes(tool)){
+		const indexTool = indexOf(tool);
+		filterTags.tools.splice(indexTool, 1);
+	} else {
+		filterTags.tools.push(tool);
+	}
+	
+}
+
+function toggleFilterLanguage(language) {
+	if(filterTags.languages.includes(language)){
+		const indexLanguage = indexOf(language);
+		filterTags.languages.splice(indexLanguage, 1);
+	} else {
+		filterTags.languages.push(language);
+	}
+}
+
+function toggleFilterRole(role) {
+	if (filterTags.roles.includes(role)) {
+		const indexRole = indexOf(role);
+		filterTags.roles.splice(indexRole, 1);
+	} else {
+		filterTags.roles.push(role);
+	}
+}
+
+function filterOffer(jobOffer){
+
+  return jobOffer.languages.includes("JavaScript");
+
+}
+
+function render() {
+
+  cardsContainer.innerHTML = jobOffers.filter(filterOffer).map(cardTemplate).join("");
+
+}
+
+render();
+
+document.getElementsByClassName(tag-btn).addEventListener('click', () => alert('x'))
+
+
+
