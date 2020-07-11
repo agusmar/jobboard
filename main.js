@@ -152,10 +152,10 @@ const jobOffers = [
 ];
 
 let filterTags = {
-  roles: [],
+  role: [],
   languages: [],
-  tools: []
-}
+  tools: [],
+};
 
 const cardsContainer = document.getElementById("cards-container");
 
@@ -209,11 +209,19 @@ function jobBottom(postedAt, contract, location) {
 }
 
 function tags(languages, tools, role) {
-  const tags = [...languages, ...tools, role];
-  const tag = (tagName) => `
-  <li><button class='tag-btn' data-tag='${tagName}' >${tagName}</button></li>
+  const tag = (tagName, tagType) => `
+    <li><button class='tag-btn' data-tagtype='${tagType}' data-tag='${tagName}' >${tagName}</button></li>
   `;
-  return tags.map(tag).join("");
+
+  const tagLanguage = (tagName) => tag(tagName, "languages");
+  const tagRole = (tagName) => tag(tagName, "role");
+  const tagTools = (tagName) => tag(tagName, "tools");
+
+  languageTags = languages.map(tagLanguage);
+  toolsTags = tools.map(tagTools);
+  roleTag = tagRole(role);
+
+  return [roleTag].concat(languageTags, toolsTags).join("");
 }
 
 function cardTemplate(jobOffer) {
@@ -222,10 +230,7 @@ function cardTemplate(jobOffer) {
         <div class="card-job">
           ${companyLogo(jobOffer.logo)}
           <div class="card-job_details">
-            ${jobTag(
-              jobOffer.company,
-              jobOffer.new
-              )}
+            ${jobTag(jobOffer.company, jobOffer.new)}
             ${job(jobOffer.position)}
             ${jobBottom(
               jobOffer.postedAt,
@@ -243,57 +248,87 @@ function cardTemplate(jobOffer) {
   `;
 }
 
-
 function toggleFilterTool(tool) {
-	
-	if(filterTags.tools.includes(tool)){
-		const indexTool = indexOf(tool);
-		filterTags.tools.splice(indexTool, 1);
-	} else {
-		filterTags.tools.push(tool);
-	}
-	
+  if (filterTags.tools.includes(tool)) {
+    const indexTool = indexOf(tool);
+    filterTags.tools.splice(indexTool, 1);
+  } else {
+    filterTags.tools.push(tool);
+  }
 }
 
 function toggleFilterLanguage(language) {
-	if(filterTags.languages.includes(language)){
-		const indexLanguage = indexOf(language);
-		filterTags.languages.splice(indexLanguage, 1);
-	} else {
-		filterTags.languages.push(language);
-	}
+  if (filterTags.languages.includes(language)) {
+    const indexLanguage = indexOf(language);
+    filterTags.languages.splice(indexLanguage, 1);
+  } else {
+    filterTags.languages.push(language);
+  }
 }
 
 function toggleFilterRole(role) {
-	if (filterTags.roles.includes(role)) {
-		const indexRole = indexOf(role);
-		filterTags.roles.splice(indexRole, 1);
-	} else {
-		filterTags.roles.push(role);
-	}
+  if (filterTags.roles.includes(role)) {
+    const indexRole = indexOf(role);
+    filterTags.roles.splice(indexRole, 1);
+  } else {
+    filterTags.roles.push(role);
+  }
 }
 
-function filterOffer(jobOffer){
+function toggleFilter(name, type) {
+  filterTypes = ["languages", "tools", "role"];
 
+  if (!filterTypes.includes(type)) {
+    console.warn(`${type} type is not a valid filter`);
+    return;
+  }
 
+  const tags = filterTags[type];
 
+  if (tags.includes(name)) {
+    tags.splice(tags.indexOf(name), 1);
+  } else {
+    tags.push(name);
+  }
+}
+
+function filterOffer(jobOffer) {
+  const filterLanguages = filterTags.languages;
+  const hasLanguages = filterLanguages.reduce(
+    (previous, language) => previous && jobOffer.languages.includes(language),
+    true
+  );
+
+  const filterRole = filterTags.role;
+  const hasRole = filterRole.reduce(
+    (previous, role) => previous && jobOffer.role == role,
+    true
+  );
+
+  const filterTools = filterTags.tools;
+  const hasTools = filterTools.reduce(
+    (previous, tool) => previous && jobOffer.tools.includes(tool),
+    true
+  );
+
+  return hasLanguages && hasRole && hasTools;
 }
 
 function render() {
+  cardsContainer.innerHTML = jobOffers
+    .filter(filterOffer)
+    .map(cardTemplate)
+    .join("");
 
-  cardsContainer.innerHTML = jobOffers.filter(filterOffer).map(cardTemplate).join("");
+  document.querySelectorAll(".tag-btn").forEach((item) => {
+    item.addEventListener("click", (event) => {
+      const tag = event.target.dataset.tag;
+      const type = event.target.dataset.tagtype;
 
+      toggleFilter(tag, type);
+      render();
+    });
+  });
 }
 
 render();
-
-document.getElementsByClassName("tag-btn").forEach(item => {
-	item.addEventListener('click', event => {
-		const tag = event.target.dataset.tag;
-		
-		render();
-	})
-})
-
-
-
