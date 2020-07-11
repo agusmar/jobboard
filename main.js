@@ -248,33 +248,6 @@ function cardTemplate(jobOffer) {
   `;
 }
 
-function toggleFilterTool(tool) {
-  if (filterTags.tools.includes(tool)) {
-    const indexTool = indexOf(tool);
-    filterTags.tools.splice(indexTool, 1);
-  } else {
-    filterTags.tools.push(tool);
-  }
-}
-
-function toggleFilterLanguage(language) {
-  if (filterTags.languages.includes(language)) {
-    const indexLanguage = indexOf(language);
-    filterTags.languages.splice(indexLanguage, 1);
-  } else {
-    filterTags.languages.push(language);
-  }
-}
-
-function toggleFilterRole(role) {
-  if (filterTags.roles.includes(role)) {
-    const indexRole = indexOf(role);
-    filterTags.roles.splice(indexRole, 1);
-  } else {
-    filterTags.roles.push(role);
-  }
-}
-
 function toggleFilter(name, type) {
   filterTypes = ["languages", "tools", "role"];
 
