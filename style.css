@@ -13,6 +13,35 @@
 
 }
 
+.filter-list{
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.tag-btn{
+  background-color: #bdddd685;
+  border-radius: 4px;
+  padding: 7px;
+  margin-left: 6px;
+  color: #7fa8ad;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.tag-btn:hover{
+  background-color: #45797e;
+}
+
+.x{
+  align-self: center;
+  margin-left: 5px;
+  
+}
+
 .header {
   display: flex;
   background: url(./images/bg-header-desktop.svg);
@@ -101,23 +130,12 @@
   font-weight: 600;
 }
 
-.card .tags li {
-  justify-content: space-evenly;
-  background-color: #bdddd685;
-  border-radius: 4px;
-  padding: 5px;
-  color: #7fa8ad;
-  font-weight: 600;
 
-}
 
 .tags {
   display: flex;
 }
 
-.tags li:hover {
-  background-color: #45797e;
-}
 
 ul {
   display: flex;

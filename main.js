@@ -157,14 +157,15 @@ let filterTags = {
   tools: [],
 };
 
-const cardsContainer = document.getElementById("cards-container");
+let filterList = []; //Array vacío.
 
-fetch("./data.json")
-  .then(function (resp) {
-    return resp.json();
-  })
-  .then(function (data) {
-    console.log(data);
+const cardsContainer = document.getElementById("cards-container");
+const filter = document.getElementById("filter");
+
+fetch("data.json")
+  .then(resp => resp.json())
+  .then(data => {
+    const x = data
   });
 
 function jobTag(company, isNew) {
@@ -208,9 +209,10 @@ function jobBottom(postedAt, contract, location) {
   `;
 }
 
+
 function tags(languages, tools, role) {
   const tag = (tagName, tagType) => `
-    <li><button class='tag-btn' data-tagtype='${tagType}' data-tag='${tagName}' >${tagName}</button></li>
+    <li><button class='tag-btn' data-tagtype='${tagType}' data-tag='${tagName}' >${tagName}</i></button> </li>
   `;
 
   const tagLanguage = (tagName) => tag(tagName, "languages");
@@ -220,9 +222,10 @@ function tags(languages, tools, role) {
   languageTags = languages.map(tagLanguage);
   toolsTags = tools.map(tagTools);
   roleTag = tagRole(role);
-
+  
   return [roleTag].concat(languageTags, toolsTags).join("");
 }
+
 
 function cardTemplate(jobOffer) {
   return `
@@ -248,24 +251,40 @@ function cardTemplate(jobOffer) {
   `;
 }
 
+
 function toggleFilter(name, type) {
   filterTypes = ["languages", "tools", "role"];
+  const tags = filterTags[type];
 
   if (!filterTypes.includes(type)) {
     console.warn(`${type} type is not a valid filter`);
+    filterList.splice(filterList.indexOf(name), 1); //Al recibir un valor undefined elimina el item del filterList
     return;
-  }
-
-  const tags = filterTags[type];
-
+  } 
+  
   if (tags.includes(name)) {
     tags.splice(tags.indexOf(name), 1);
+    filterList.splice(filterList.indexOf(name),1); //Si ya existe lo elimina del array filterList
   } else {
     tags.push(name);
+    filterList.push(name);  //Incluye el name en un array vacío llamado filterList
   }
-}
+
+  console.log(filterList)
+
+  }
+
+//Función que primero limpia lo que se está mostrando para así luego mostrar el contenido actualizado de la filterList.
+ function filterButtonTemplate() {
+  filter.innerHTML = '';
+  filterList.forEach((item, index) => {
+    filter.innerHTML += `<li><button class='tag-btn' data-name='${item}'>${filterList[index]}<i class="fas fa-times x"></i></button> </li>`;
+  });
+
+} 
 
 function filterOffer(jobOffer) {
+
   const filterLanguages = filterTags.languages;
   const hasLanguages = filterLanguages.reduce(
     (previous, language) => previous && jobOffer.languages.includes(language),
@@ -294,11 +313,12 @@ function render() {
     .join("");
 
   document.querySelectorAll(".tag-btn").forEach((item) => {
-    item.addEventListener("click", (event) => {
-      const tag = event.target.dataset.tag;
-      const type = event.target.dataset.tagtype;
+    item.addEventListener("click", (e) => {
+      const tag = e.target.dataset.tag;
+      const type = e.target.dataset.tagtype;
 
       toggleFilter(tag, type);
+      filterButtonTemplate(); //llamada de la función que limpia y actualiza lo que se muestra en pantalla.
       render();
     });
   });
